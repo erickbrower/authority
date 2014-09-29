@@ -2,3 +2,4 @@ node_modules
 assets/bower
 npm-debug.log
 public/*
+!public/.gitkeep
