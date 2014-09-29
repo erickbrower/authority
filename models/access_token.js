@@ -13,5 +13,6 @@ exports.init = function init(db) {
   });
 
   AccessToken.validatesPresenceOf('token', 'expires');
+
   return AccessToken;
 };

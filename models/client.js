@@ -9,8 +9,18 @@ exports.init = function init(db) {
     redirect_uri: {
       type: String,
       length: 500
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now
     }
   });
+
+  Client.validatesPresenceOf('secret', 'redirect_uri');
 
   return Client;
 };
