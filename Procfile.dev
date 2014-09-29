@@ -1,0 +1,2 @@
+db: postgres -D /usr/local/var/postgres 
+selenium: java -jar $SELENIUM_SERVER_JAR

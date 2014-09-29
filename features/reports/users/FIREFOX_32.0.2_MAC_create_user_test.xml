@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="create_user_test"
+             errors="0"
+             failures="1"
+             tests="3">
+  
+  <testsuite errors="0" failures="1" hostname="" id=""
+    name="List Users" package="create_user_test" skipped="2"
+    tests="3" time="" timestamp="">
+    
+    
+      <testcase name="Timed out while waiting for element &lt;body&gt; to be present for 1000 milliseconds.">
+        
+          <failure message="Expected &quot;visible&quot; but got: &quot;not found&quot;"></failure>
+        
+        
+      </testcase>
+    
+    
+    </testsuite>
+  
+</testsuites>
