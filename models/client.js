@@ -10,5 +10,7 @@ exports.init = function init(db) {
       type: String,
       length: 500
     }
-  }):
+  });
+
+  return Client;
 };
