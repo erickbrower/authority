@@ -1,0 +1,14 @@
+{
+  "development": {
+    "host": "127.0.0.1",
+    "username": "erick",
+    "password": "",
+    "database": "authority_dev"
+  },
+  "test": {
+    "host": "127.0.0.1",
+    "user": "erick",
+    "password": "",
+    "database": "authority_test"
+  }
+}
