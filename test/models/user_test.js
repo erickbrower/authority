@@ -12,7 +12,7 @@ describe('.create', function() {
       });
     });
 
-    it('should hash the password if it has changed', function(next) {
+    it('should hash the password again if it has changed', function(next) {
       var newPass = '12345678';
       User.create(helper.factories.User(), function(err, user) {
         user.password = newPass;

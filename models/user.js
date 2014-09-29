@@ -10,9 +10,30 @@ exports.init = function init(db) {
     password: {
       type: String,
       length: 255
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now
     }
   });
 
+  User.beforeCreate = function(next, user) {
+    updatePassword(user, next);
+  };
+
+  User.beforeSave = function(next, user) {
+    if (this.propertyChanged('password')) {
+      updatePassword(user, next);
+    }
+  };
+
+  User.validatesPresenceOf('username', 'password');
+
+  // private
   function generateHash(password, next) {
     bcrypt.genSalt(10, function(err, salt) {
       if (err) return next(err);
@@ -30,18 +51,6 @@ exports.init = function init(db) {
       next();
     });
   };
-
-  User.beforeCreate = function(next, user) {
-    updatePassword(user, next);
-  };
-
-  User.beforeSave = function(next, user) {
-    if (this.propertyChanged('password')) {
-      updatePassword(user, next);
-    }
-  };
-
-  User.validatesPresenceOf('username', 'password');
 
   return User;
 };

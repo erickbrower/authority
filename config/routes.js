@@ -1,19 +1,20 @@
-var postsController = require('../controllers/oauth');
+var oauthController = require('../controllers/oauth'),
+  usersController = require('../controllers/users');
 
 var router = require('express').Router();
 
 exports.route = function(app) {
 
-  router.param('post_id', postsController.params.postId);
+  router.param('user_id', usersController.params.userId);
 
-  router.route('/posts')
-    .get(postsController.index)
-    .post(postsController.create);
+  router.route('/users')
+    .get(usersController.index)
+    .post(usersController.create);
 
-  router.route('/posts/:post_id')
-    .get(postsController.show)
-    .put(postsController.update)
-    .delete(postsController.destroy);
+  router.route('/users/:user_id')
+    .get(usersController.show)
+    .put(usersController.update)
+    .delete(usersController.destroy);
 
   app.use('/api', router);
 };
