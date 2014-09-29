@@ -11,6 +11,17 @@ describe('.create', function() {
         next();
       });
     });
+
+    it('should hash the password if it has changed', function(next) {
+      var newPass = '12345678';
+      User.create(helper.factories.User(), function(err, user) {
+        user.password = newPass;
+        user.save(function(err) {
+          assert.notEqual(user.password, newPass);
+          next();
+        });
+      });
+    });
   });
 
   describe('with invalid attributes', function() {

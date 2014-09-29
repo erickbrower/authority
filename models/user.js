@@ -13,18 +13,32 @@ exports.init = function init(db) {
     }
   });
 
-  User.beforeSave = function(next, user) {
-    if (!user.propertyChanged('password')) {
-      return next();
-    }
+  function generateHash(password, next) {
     bcrypt.genSalt(10, function(err, salt) {
       if (err) return next(err);
-      bcrypt.hash(user.password, salt, null, function(err, hash) {
+      bcrypt.hash(password, salt, null, function(err, hash) {
         if (err) return next(err);
-        user.password = hash;
-        next();
+        next(null, hash);
       });
     });
+  }
+
+  function updatePassword(user, next) {
+    generateHash(user.password, function(err, hash) {
+      if (err) return next(err);
+      user.password = hash;
+      next();
+    });
+  };
+
+  User.beforeCreate = function(next, user) {
+    updatePassword(user, next);
+  };
+
+  User.beforeSave = function(next, user) {
+    if (this.propertyChanged('password')) {
+      updatePassword(user, next);
+    }
   };
 
   User.validatesPresenceOf('username', 'password');
