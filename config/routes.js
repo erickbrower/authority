@@ -1,21 +1,30 @@
 var oauthController = require('../app/controllers/oauth'),
+  usersController = require('../app/controllers/users'),
   usersApiController = require('../app/controllers/api/users');
-
-var router = require('express').Router();
 
 exports.route = function(app) {
 
-  /* --- API Routes --- */
-  router.param('user_id', usersApiController.params.userId);
+  /* --- Page Routes --- */
+  var router = require('express').Router();
 
-  router.route('/users')
+  router.param('user_id', usersController.userId);
+  router.get('/users', usersController.index);
+  router.get('/users/new/:user_id', usersController.new);
+  router.get('/users/edit/:user_id', usersController.edit);
+
+  app.use(router);
+
+  /* --- API Routes --- */
+  var apiRouter = require('express').Router();
+
+  apiRouter.param('user_id', usersController.userId);
+  apiRouter.route('/users')
     .get(usersApiController.index)
     .post(usersApiController.create);
-
-  router.route('/users/:user_id')
+  apiRouter.route('/users/:user_id')
     .get(usersApiController.show)
     .put(usersApiController.update)
     .delete(usersApiController.destroy);
 
-  app.use('/api', router);
+  app.use('/api', apiRouter);
 };

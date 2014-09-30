@@ -1,21 +1,9 @@
 var User = require('../../models').models.User;
 
-exports.params = {
-  userId: function userId(req, res, next, id) {
-    User.find(id, function(err, user) {
-      if (err) {
-        return next(404);
-      }
-      req.user = user;
-      next();
-    });
-  }
-}
-
 exports.index = function index(req, res) {
   //TODO: paginate
   User.all(function(err, users) {
-    if(err) {
+    if (err) {
       res.status(404).send(err);
     } else {
       res.json(users);

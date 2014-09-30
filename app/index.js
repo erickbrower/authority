@@ -7,9 +7,6 @@ var express = require('express'),
   cookieParser = require('cookie-parser'),
   lessMiddleware = require('less-middleware'),
   router = require('../config/routes'),
-  fs = require('fs'),
-  path = require('path'),
-  Handlebars = require('handlebars'),
   app = express();
 
 app.use(logger('short'));
@@ -26,10 +23,9 @@ app.engine('html', require('consolidate').handlebars);
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
 
-// Register partials
 var partials = path.join(__dirname, 'views', 'partials');
 fs.readdirSync(partials).forEach(function(file) {
-  var source = fs.readFileSync(partials + '/' + file, "utf8"),
+  var source = fs.readFileSync(partials + file, "utf8"),
     partial = /(.+)\.html/.exec(file).pop();
 
   Handlebars.registerPartial(partial, source);
