@@ -2,7 +2,7 @@ var express = require('express'),
   logger = require('morgan'),
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
-  favicon = require('serve-favicon'),
+  //favicon = require('serve-favicon'),
   oauthserver = require('oauth2-server'),
   cookieParser = require('cookie-parser'),
   lessMiddleware = require('less-middleware'),
@@ -14,9 +14,10 @@ var express = require('express'),
 
 app.use(logger('short'));
 
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
 app.use(methodOverride());
-app.use(favicon());
 app.use(cookieParser());
 
 router.route(app);
@@ -26,9 +27,9 @@ app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
 
 // Register partials
-var partials = "./views/partials/";
+var partials = path.join(__dirname, 'views', 'partials');
 fs.readdirSync(partials).forEach(function(file) {
-  var source = fs.readFileSync(partials + file, "utf8"),
+  var source = fs.readFileSync(partials + '/' + file, "utf8"),
     partial = /(.+)\.html/.exec(file).pop();
 
   Handlebars.registerPartial(partial, source);

@@ -1,4 +1,4 @@
-var User = require('../models').models.User;
+var User = require('../../models').models.User;
 
 exports.params = {
   userId: function userId(req, res, next, id) {

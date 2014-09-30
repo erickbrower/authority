@@ -1,4 +1,4 @@
-var db = require('../config/db'),
+var db = require('../../config/db'),
   AccessToken = require('./access_token').init(db),
   RefreshToken = require('./refresh_token').init(db),
   Client = require('./client').init(db),

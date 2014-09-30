@@ -6,3 +6,6 @@ public/*
 features/reports/*
 !features/reports/.gitkeep
 docs
+tmp/*
+!tmp/.gitkeep
+config/db/conf.json

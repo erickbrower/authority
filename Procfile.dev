@@ -1,2 +1,2 @@
 db: postgres -D /usr/local/var/postgres 
-selenium: java -jar $SELENIUM_SERVER_JAR
+selenium: java -jar ./tmp/selenium-server-standalone-2.43.1.jar

@@ -1,7 +1,7 @@
 var helper = require('../test_helper'),
   assert = require('assert'),
   app = require('../../app'),
-  User = require('../../models').models.User,
+  User = require('../../app/models').models.User,
   request = require('supertest');
 
 describe('GET /api/users', function() {

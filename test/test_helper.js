@@ -1,6 +1,6 @@
 process.env.NODE_ENV = 'test';
 
-var db = require('../models').db,
+var db = require('../app/models').db,
   Faker = require('Faker'),
   _ = require('lodash');
 

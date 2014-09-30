@@ -1,6 +1,6 @@
 {
   "name": "authority",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "OAuth 2 Provider service",
   "main": "bin/www",
   "engines": {
@@ -10,7 +10,8 @@
   "scripts": {
     "lint": "gulp lint",
     "start": "bin/www",
-    "test": "mocha",
+    "start-dev": "DEBUG=* bin/www",
+    "test": "mocha test/models test/integration",
     "nightwatch": "bin/nw --config config/nightwatch.json --output features/reports",
     "docs": "gulp docs"
   },
@@ -45,6 +46,8 @@
     "jshint": "^2.5.6",
     "jshint-stylish": "^1.0.0",
     "mocha": "^1.21.4",
-    "supertest": "^0.13.0"
+    "progress": "^1.1.8",
+    "supertest": "^0.13.0",
+    "wget": "0.0.1"
   }
 }
