@@ -3,3 +3,6 @@ assets/bower
 npm-debug.log
 public/*
 !public/.gitkeep
+features/reports/*
+!features/reports/.gitkeep
+docs

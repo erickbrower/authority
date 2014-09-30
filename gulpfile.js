@@ -2,7 +2,8 @@ var gulp = require('gulp'),
   jshint = require('gulp-jshint'),
   stylish = require('jshint-stylish'),
   prettify = require('gulp-prettify'),
-  dbTasks = require('./lib/tasks/db');
+  docco = require('gulp-docco'),
+  dbTasks = require('./lib/tasks/db'),
   assetsTasks = require('./lib/tasks/assets');
 
 gulp.task('default', ['lint']);
@@ -10,10 +11,8 @@ gulp.task('default', ['lint']);
 var sources = [
   './bin/**/*',
   './config/**/*.js',
-  './controllers/**/*.js',
-  './models/**/*.js',
+  './app/**/*.js',
   './test/**/*.js',
-  './app.js',
   './gulpfile.js',
   './interface.js'
 ];
@@ -25,5 +24,12 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('fail'));
 });
 
+gulp.task('docs', function() {
+  return gulp.src(sources)
+    .pipe(docco())
+    .pipe(gulp.dest('./docs'));
+});
+
 dbTasks.init(gulp);
+
 assetsTasks.init(gulp);

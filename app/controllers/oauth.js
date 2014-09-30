@@ -2,7 +2,7 @@ var oauthserver = require('oauth2-server');
 
 exports.route = function(app) {
   app.oauth = oauthserver({
-    model: require('./model'),
+    model: require('../../lib/oauth_interface'),
     grants: ['auth_code', 'password'],
     debug: true
   });

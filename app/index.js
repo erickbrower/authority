@@ -6,7 +6,7 @@ var express = require('express'),
   oauthserver = require('oauth2-server'),
   cookieParser = require('cookie-parser'),
   lessMiddleware = require('less-middleware'),
-  router = require('./config/routes'),
+  router = require('../config/routes'),
   fs = require('fs'),
   path = require('path'),
   Handlebars = require('handlebars'),
@@ -34,7 +34,7 @@ fs.readdirSync(partials).forEach(function(file) {
   Handlebars.registerPartial(partial, source);
 });
 
-var publicPath = path.join(__dirname, 'public');
+var publicPath = path.join(__dirname, '..', 'public');
 
 app.use(lessMiddleware(publicPath));
 
