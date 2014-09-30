@@ -50,6 +50,16 @@ gulp.task('dev:deps:selenium', function(done) {
 
 gulp.task('dev:deps', ['dev:deps:selenium']);
 
+gulp.watch('./app/assets/javascripts/**/*.js', ['assets:precompile:js'])
+  .on('change', function(event) {
+    console.log('js file ' + event.path + ' was ' + event.type + ', compiling...');
+  });
+
+gulp.watch('./app/assets/stylesheets/**/*.scss', ['assets:precompile:scss'])
+  .on('change', function(event) {
+    console.log('scss file ' + event.path + ' was ' + event.type + ', compiling...');
+  });
+
 dbTasks.init(gulp);
 
 assetsTasks.init(gulp);
