@@ -35,7 +35,7 @@ gulp.task('docs', function() {
     .pipe(gulp.dest('./docs'));
 });
 
-gulp.task('deps:selenium', function(done) {
+gulp.task('dev:deps:selenium', function(done) {
   var filename = 'selenium-server-standalone-2.43.1.jar',
     out = path.join(__dirname, 'tmp', filename),
     uri = 'http://selenium-release.storage.googleapis.com/2.43/' + filename;
@@ -47,6 +47,8 @@ gulp.task('deps:selenium', function(done) {
     res.pipe(file);
   });
 });
+
+gulp.task('dev:deps', ['dev:deps:selenium']);
 
 dbTasks.init(gulp);
 

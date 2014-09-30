@@ -9,3 +9,4 @@ docs
 tmp/*
 !tmp/.gitkeep
 config/db/conf.json
+app/assets/bower

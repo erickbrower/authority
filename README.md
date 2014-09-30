@@ -2,6 +2,21 @@
 
 Node.js OAuth2 Provider service on Express and PostgreSQL.
 
+### Development
+
+0. `brew install postgres`
+
+1. `npm install`
+2. `npm install -g foreman mocha nodemon gulp`
+3. `gulp dev:deps`
+4. `nf start --procfile=Procfile.dev`
+5. Log into postgres and create the `authority_dev` and `authority_test` databases.
+6. `gulp db:migrate`
+7. `gulp db:test:prepare`
+
+8. `bower install`
+9. `gulp assets:precompile`
+
 ### API Specification
 
 #### `GET /api/users`

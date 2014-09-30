@@ -6,7 +6,10 @@ var express = require('express'),
   oauthserver = require('oauth2-server'),
   cookieParser = require('cookie-parser'),
   lessMiddleware = require('less-middleware'),
+  Handlebars = require('handlebars'),
   router = require('../config/routes'),
+  path = require('path'),
+  fs = require('fs'),
   app = express();
 
 app.use(logger('short'));
@@ -25,9 +28,10 @@ app.set('views', path.join(__dirname, 'views'));
 
 var partials = path.join(__dirname, 'views', 'partials');
 fs.readdirSync(partials).forEach(function(file) {
-  var source = fs.readFileSync(partials + file, "utf8"),
+  var source = fs.readFileSync(partials + '/' + file, "utf8"),
     partial = /(.+)\.html/.exec(file).pop();
 
+    console.log(partial);
   Handlebars.registerPartial(partial, source);
 });
 

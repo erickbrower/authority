@@ -1,4 +1,4 @@
-var User = require('../../models').models.User;
+var User = require('../models').models.User;
 
 exports.userId = function userId(req, res, next, id) {
   User.find(id, function(err, user) {
@@ -11,13 +11,19 @@ exports.userId = function userId(req, res, next, id) {
 };
 
 exports.index = function index(req, res) {
-  //render index
+  User.all(function(err, users) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.render('users/index', { users: users });
+    }
+  });
 };
 
-exports.new = function index(req, res) {
-  //render new
+exports.new = function nu(req, res) {
+  res.render('users/new', { user: new User() });
 };
 
 exports.edit = function edit(req, res) {
-  //render edit
+  res.render('users/edit', { user: req.user });
 };
