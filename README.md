@@ -2,15 +2,15 @@
 
 Node.js OAuth2 Provider service on Express and PostgreSQL.
 
-## API Specification
+### API Specification
 
-### `GET /api/users`
+#### `GET /api/users`
 
-#### Query Parameters
+##### Query Parameters
 * __page__ (Integer) - Starts with 1
 * __limit__ (Integer) - Minimum of 1, maximum of 1000
 
-#### Response (200 OK)
+##### Response (200 OK)
 
 ```
 {
@@ -18,13 +18,13 @@ Node.js OAuth2 Provider service on Express and PostgreSQL.
 }
 ```
 
-### `GET /api/users/:user_id`
+#### `GET /api/users/:user_id`
 
-#### URI Parameters
+##### URI Parameters
 * __user_id__ (Integer) 
 
 
-#### Response (200 OK)
+##### Response (200 OK)
 
 ```
 {
@@ -32,9 +32,9 @@ Node.js OAuth2 Provider service on Express and PostgreSQL.
 }
 ```
 
-### `POST /api/users`
+#### `POST /api/users`
 
-#### Request (Content-Type: application/json)
+##### Request (Content-Type: application/json)
 ```
 {
   "username": "solidsnake",
@@ -42,9 +42,9 @@ Node.js OAuth2 Provider service on Express and PostgreSQL.
 }
 ```
 
-### `PUT /api/users/:user_id`
+#### `PUT /api/users/:user_id`
 
-### `DELETE /api/users/:user_id`
+#### `DELETE /api/users/:user_id`
 
 
 
