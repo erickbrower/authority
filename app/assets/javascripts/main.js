@@ -1,9 +1,9 @@
 require.config({
 	paths: {
-		underscore: './underscore',
-		backbone: './backbone',
-		marionette: './backbone.marionette.min',
-		jquery: './jquery.min',
+		jquery: './vendors/jquery.min',
+		underscore: './vendors/underscore',
+		backbone: './vendors/backbone',
+		marionette: './vendors/backbone.marionette.min'
 	},
 	shim: {
 		underscore: {

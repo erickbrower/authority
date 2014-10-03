@@ -85,25 +85,27 @@ describe('PUT /api/users/:user_id', function() {
 
     beforeEach(function(next) {
       User.create(helper.factories.User(), function(err, user) {
-        if (err) throw err;
+        assert(!err || err === {});
         resource = user;
         next();
       });
     });
 
     describe('with valid attributes', function() {
-      it('should update the User resource', function() {
-        var newUserName = helper.factories.User().userName;
+      it('should update the User resource', function(next) {
+        var username = helper.factories.User().username;
         request(app)
           .put('/api/users/' + resource.id)
           .send({
-            userName: newUserName
+            username: username
           })
           .expect('Content-Type', /json/)
           .expect(200)
           .end(function(err, res) {
-            if (err) throw err;
-            assert.equal(res.body.userName, newUserName);
+            console.log('BALLSACK');
+            assert(!err || err === {});
+            assert.equal(res.body.username, username);
+            next();
           });
       });
     });
