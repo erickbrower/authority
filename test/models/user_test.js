@@ -1,9 +1,8 @@
 var helper = require('../test_helper'),
   assert = require('assert'),
-  _ = require('lodash'),
   User = require('../../app/models').models.User;
 
-describe('.create', function() {
+describe('User#create', function() {
   describe('with valid attributes', function() {
     it('should save successfully', function(next) {
       User.create(helper.factories.User(), function(err, user) {

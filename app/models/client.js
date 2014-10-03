@@ -6,21 +6,26 @@ exports.init = function init(db) {
       type: String,
       length: 255
     },
-    redirect_uri: {
+    redirectUri: {
       type: String,
-      length: 500
+      length: 500,
+      name: 'redirect_uri'
     },
     createdAt: {
       type: Date,
-      default: Date.now
+      default: Date.now,
+      name: 'created_at'
     },
     updatedAt: {
       type: Date,
-      default: Date.now
+      default: Date.now,
+      name: 'updated_at'
     }
+  }, {
+    table: 'clients'
   });
 
-  Client.validatesPresenceOf('secret', 'redirect_uri');
+  Client.validatesPresenceOf('secret', 'redirectUri');
 
   return Client;
 };

@@ -2,9 +2,10 @@ process.env.NODE_ENV = 'test';
 
 var db = require('../app/models').db,
   Faker = require('Faker'),
-  _ = require('lodash');
+  _ = require('lodash'),
+  hat = require('hat'),
+  moment = require('moment');
 
-//Drop and create the tables for each test
 beforeEach(function(done) {
   db.automigrate(function(err) {
     if (err) throw err;
@@ -30,6 +31,28 @@ module.exports = {
         return {
           username: Faker.Internet.userName(),
           password: Faker.Lorem.words()
+        };
+      });
+    },
+    AccessToken: function(num) {
+      return build(num, function() {
+        return {
+          expiresAt: moment().add(30, 'minutes').format()
+        };
+      });
+    },
+    RefreshToken: function(num) {
+      return build(num, function() {
+        return {
+          expiresAt: moment().add(30, 'minutes').format()
+        };
+      });
+    },
+    Client: function(num) {
+      return build(num, function() {
+        return {
+          secret: hat(),
+          redirectUri: 'http://example.com/callback'
         };
       });
     }

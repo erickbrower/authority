@@ -1,0 +1,9 @@
+{
+  "verbose": true,
+  "ignore": [
+    "test/**/*", 
+    "bin/**/*", 
+    "tmp/**/*", 
+    "node_modules/**/*"
+  ]
+}

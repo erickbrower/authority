@@ -7,49 +7,49 @@ var db = require('../../config/db'),
 /* AccessToken -> User */
 AccessToken.belongsTo(User, {
   as: 'user',
-  foreignKey: 'userId'
+  foreignKey: 'user_id'
 });
 
 /* User <- AccessToken */
 User.hasMany(AccessToken, {
   as: 'accessTokens',
-  foreignKey: 'userId'
+  foreignKey: 'user_id'
 });
 
 /* AccessToken -> Client */
 AccessToken.belongsTo(Client, {
   as: 'client',
-  foreignKey: 'clientId'
+  foreignKey: 'client_id'
 });
 
 /* Client <- AccessToken */
 Client.hasMany(AccessToken, {
   as: 'accessTokens', 
-  foreignKey: 'accessTokenId'
+  foreignKey: 'access_token_id'
 });
 
 /* RefreshToken -> User */
 RefreshToken.belongsTo(User, {
   as: 'user',
-  foreignKey: 'userId'
+  foreignKey: 'user_id'
 });
 
 /* User <- RefreshToken */
 User.hasMany(RefreshToken, {
   as: 'refreshTokens',
-  foreignKey: 'userId'
+  foreignKey: 'user_id'
 });
 
 /* RefreshToken -> Client */
 RefreshToken.belongsTo(Client, {
   as: 'client',
-  foreign_key: 'clientId'
+  foreign_key: 'client_id'
 });
 
 /* Client <- RefreshToken */
 Client.hasMany(RefreshToken, {
   as: 'refreshTokens', 
-  foreignKey: 'clientId'
+  foreignKey: 'client_id'
 });
 
 // Make the updated db object available

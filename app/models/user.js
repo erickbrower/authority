@@ -13,12 +13,16 @@ exports.init = function init(db) {
     },
     createdAt: {
       type: Date,
-      default: Date.now
+      default: Date.now,
+      name: 'created_at'
     },
     updatedAt: {
       type: Date,
-      default: Date.now
+      default: Date.now,
+      name: 'updated_at'
     }
+  }, {
+    table: 'users'
   });
 
   User.beforeCreate = function(next, user) {
@@ -50,7 +54,7 @@ exports.init = function init(db) {
       user.password = hash;
       next();
     });
-  };
+  }
 
   return User;
 };
