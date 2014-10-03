@@ -102,7 +102,6 @@ describe('PUT /api/users/:user_id', function() {
           .expect('Content-Type', /json/)
           .expect(200)
           .end(function(err, res) {
-            console.log('BALLSACK');
             assert(!err || err === {});
             assert.equal(res.body.username, username);
             next();

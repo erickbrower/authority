@@ -25,7 +25,7 @@ exports.init = function init(db) {
     table: 'users'
   });
 
-  User.beforeValidate = function(next, user) {
+  User.beforeCreate = function(next, user) {
     updatePassword(user, next);
   };
 
@@ -45,14 +45,12 @@ exports.init = function init(db) {
       if (err) return next(err);
       bcrypt.hash(password, salt, null, function(err, hash) {
         if (err) return next(err);
-        console.log('next is called in genhash');
         next(null, hash);
       });
     });
   }
 
   function updatePassword(user, next) {
-    console.log('updating password');
     generateHash(user.password, function(err, hash) {
       if (err) return next(err);
       user.password = hash;
