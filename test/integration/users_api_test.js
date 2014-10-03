@@ -6,16 +6,21 @@ var helper = require('../test_helper'),
 
 describe('GET /api/users', function() {
   it('should return all existing Users', function(next) {
-    User.create(helper.factories.User(3), function(err) {
-      if (err) throw err;
+    User.create(helper.factories.User(4), function(err) {
+      assert(!err);
     });
     request(app)
       .get('/api/users')
+      .query({
+        page: 1,
+        page_size: 2
+      })
       .expect('Content-Type', /json/)
       .expect(200)
       .end(function(err, res) {
         if (err) throw err;
-        assert.equal(res.body.length, 3);
+        assert.equal(res.body.length, 2);
+        assert.equal(res.get('X-Total-Count'), 4);
         next();
       })
   });

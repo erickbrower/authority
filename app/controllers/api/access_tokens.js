@@ -1,14 +1,19 @@
 var AccessToken = require('../../models').models.AccessToken;
 
 exports.index = function index(req, res) {
-  //TODO: paginate
-  AccessToken.all(function(err, accessTokens) {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.json(accessTokens);
-    }
-  });
+  AccessToken.paginate(
+    req.query.page,
+    req.query.page_size,
+    function(err, result) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.set({
+          'X-Total-Count': result.count
+        });
+        res.json(result.resources);
+      }
+    });
 };
 
 exports.show = function show(req, res) {

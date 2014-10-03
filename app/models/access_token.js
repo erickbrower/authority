@@ -1,6 +1,7 @@
 var Schema = require('jugglingdb').Schema,
   hat = require('hat'),
-  moment = require('moment');
+  moment = require('moment'),
+  pagination = require('../../lib/pagination');
 
 exports.init = function init(db) {
   var AccessToken = db.define('AccessToken', {
@@ -24,8 +25,12 @@ exports.init = function init(db) {
 
   AccessToken.beforeCreate = function beforeCreate(next, token) {
     token.token = hat();
-    token.expires = token.expires || moment().add(30, 'minutes').format();
+    token.expires = token.expires || moment().add(1, 'hour').format();
     next();
+  };
+
+  AccessToken.paginate = function(page, page_size, next) {
+    return pagination.paginate(AccessToken, page, page_size, next);
   };
 
   return AccessToken;

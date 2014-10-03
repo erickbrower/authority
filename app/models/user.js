@@ -1,5 +1,6 @@
 var Schema = require('jugglingdb').Schema,
-  bcrypt = require('bcrypt-nodejs');
+  pagination = require('../../lib/pagination'),
+  bcryptHash = require('../../lib/bcrypt_hash');
 
 exports.init = function init(db) {
   var User = db.define('User', {
@@ -26,7 +27,7 @@ exports.init = function init(db) {
   });
 
   User.beforeCreate = function(next, user) {
-    updatePassword(user, next);
+    return updatePassword(user, next);
   };
 
   User.beforeSave = function(next, user) {
@@ -39,19 +40,13 @@ exports.init = function init(db) {
 
   User.validatesPresenceOf('username', 'password');
 
-  // private
-  function generateHash(password, next) {
-    bcrypt.genSalt(10, function(err, salt) {
-      if (err) return next(err);
-      bcrypt.hash(password, salt, null, function(err, hash) {
-        if (err) return next(err);
-        next(null, hash);
-      });
-    });
-  }
+  User.paginate = function(page, page_size, next) {
+    return pagination.paginate(User, page, page_size, next);
+  };
 
+  // private
   function updatePassword(user, next) {
-    generateHash(user.password, function(err, hash) {
+    bcryptHash(user.password, function(err, hash) {
       if (err) return next(err);
       user.password = hash;
       next();

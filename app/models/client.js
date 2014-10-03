@@ -1,4 +1,6 @@
-var Schema = require('jugglingdb').Schema;
+var Schema = require('jugglingdb').Schema,
+  bcryptHash = require('../../lib/bcrypt_hash'),
+  pagination = require('../../lib/pagination');
 
 exports.init = function init(db) {
   var Client = db.define('Client', {
@@ -26,6 +28,30 @@ exports.init = function init(db) {
   });
 
   Client.validatesPresenceOf('secret', 'redirectUri');
+
+  Client.beforeCreate = function(next, client) {
+    hashSecret(client, next);
+  };
+
+  Client.beforeSave = function(next, client) {
+    if (this.propertyChanged('secret') && client.id) {
+      return hashSecret(client, next);
+    } else {
+      next();
+    }
+  };
+
+  Client.paginate = function(page, page_size, next) {
+    return pagination.paginate(Client, page, page_size, next);
+  };
+
+  function hashSecret(client, next) {
+    bcryptHash(client.secret, function(err, hash) {
+      if (err) return next(err);
+      client.secret = hash;
+      next();
+    });
+  };
 
   return Client;
 };

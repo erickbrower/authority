@@ -32,7 +32,7 @@ describe('POST /api/clients', function() {
         .expect(201)
         .end(function(err, res) {
           assert(!err);
-          assert.equal(res.body.secret, attrs.secret);
+          assert(res.body.secret);
           next();
         });
     });
