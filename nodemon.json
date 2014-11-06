@@ -1,6 +1,7 @@
 {
   "verbose": true,
   "ignore": [
+    "app/assets/bower/**/*",
     "test/**/*", 
     "bin/**/*", 
     "tmp/**/*", 

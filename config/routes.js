@@ -14,27 +14,11 @@ exports.route = function(app) {
   /* --- Page Routes --- */
   var router = require('express').Router();
 
-  router.param('user_id', usersController.userId);
-  router.get('/users', usersController.index);
-  router.get('/users/new', usersController.new);
-  router.get('/users/edit/:user_id', usersController.edit);
+  app.all('/admin*', function(req, res) {
+    res.render('index');
+  });
 
-  router.param('client_id', clientsController.clientId);
-  router.get('/clients', clientsController.index);
-  router.get('/clients/new', clientsController.new);
-  router.get('/clients/edit/:client_id', clientsController.edit);
-
-  router.param('access_token_id', accessTokensController.accessTokenId);
-  router.get('/access_tokens', accessTokensController.index);
-  router.get('/access_tokens/new', accessTokensController.new);
-  router.get('/access_tokens/edit/:access_token_id', accessTokensController.edit);
-
-  router.param('refresh_token_id', refreshTokensController.refreshTokenId);
-  router.get('/refresh_tokens', refreshTokensController.index);
-  router.get('/refresh_tokens/new', refreshTokensController.new);
-  router.get('/refresh_tokens/edit/:refresh_token_id', refreshTokensController.edit);
-
-  app.use(router);
+  app.use('/admin', router);
 
   /* --- API Routes --- */
   var api= require('express').Router();

@@ -1,0 +1,5 @@
+db: 
+  image: erickbrower/authority_db
+  command: postgres
+  ports: 
+    - "49200:5432"

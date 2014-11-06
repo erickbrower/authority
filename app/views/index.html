@@ -1,0 +1,53 @@
+{{>head}}
+<div id='main' class="container">
+  Please enable JavaScript, you weirdo.
+</div> <!-- /container -->
+
+<!-- vendor libraries -->
+<script data-main="/javascripts/main" src="/javascripts/vendors/require.js"></script>
+</body>
+</html>
+{{>foot}}
+
+<script type='text/template' id='user-row-tpl'>
+<td><%- id %></td>
+  <td><%- username %></td>
+  <td><%- createdAt %></td>
+  <td>
+    <button type="button" class="btn btn-default" data-resource="<%- id %>">Edit</button>
+    <button type="button" class="btn btn-danger" data-resource="<%- id %>">Delete</button>
+  </td>
+</script>
+
+<script type='text/template' id='user-grid-tpl'>
+<div class="row">
+    <div class="col-sm-12 col-md-12"> 
+      <div class="row">
+        <div class="col-md-5">
+          <h1 class="page-header">Users <small>Manage</small></h1>
+        </div>
+        <div class="col-md-7" style="padding-top: 45px">
+          <button type="button" class="btn btn-primary">Create User</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div id='user-grid' class="col-sm-12 col-md-12 main">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Username</th>
+              <th>Created At</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody id='user-rows'>
+          </tbody>
+        </table>
+      </div> 
+    </div>
+  </div>
+</script>

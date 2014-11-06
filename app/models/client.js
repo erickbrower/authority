@@ -45,6 +45,7 @@ exports.init = function init(db) {
     return pagination.paginate(Client, page, page_size, next);
   };
 
+  /* -- private -- */
   function hashSecret(client, next) {
     bcryptHash(client.secret, function(err, hash) {
       if (err) return next(err);

@@ -22,16 +22,57 @@ require.config({
 });
 
 require([
-	'app',
-	'backbone',
-	'routers/index',
-	'controllers/index'
-], function (app, Backbone, Router, Controller) {
+	'marionette',
+    'backbone'
+], function (Marionette, Backbone) {
 	'use strict';
 
-	app.start();
+    var AuthorityDashboard = new Marionette.Application();
 
-	new Router({ controller: Controller });
+    AuthorityDashboard.addRegions({
+      mainRegion: '#main'
+    });
 
-	Backbone.history.start();
+    AuthorityDashboard.User = Backbone.Model.extend({
+      defaults: {
+        id: '',
+        username: '',
+        createdAt: ''
+      }
+    });
+
+    AuthorityDashboard.UserCollection = Backbone.Collection.extend({
+      model: AuthorityDashboard.User
+    });
+
+    AuthorityDashboard.UserItemView = Marionette.ItemView.extend({
+      template: '#user-grid-tpl'
+    });
+
+    AuthorityDashboard.UsersView = Marionette.CollectionView.extend({
+      tagName: 'tr',
+      childView: AuthorityDashboard.UserItemView
+    });
+
+    AuthorityDashboard.StaticView = Marionette.ItemView.extend({
+      template: '#user-admin'
+    });
+
+    AuthorityDashboard.on('start', function() {
+      var users = new AuthorityDashboard.UserCollection([
+        {
+          id: '124', 
+          username: 'BobAwesome',
+          createdAt: 'June 12, 2014'
+        }
+      ]);
+
+      var usersListView = new AuthorityDashboard.UsersView({
+        collection: users
+      });
+
+      AuthorityDashboard.mainRegion.show(usersListView);
+    });
+
+    AuthorityDashboard.start();
 });
